@@ -16,19 +16,27 @@ export default{
   },
   created(){
     this.titleFilter()
+
   },
   methods: {
     titleFilter(){
       let apiUrl = `${store.apiMovieURL}?api_key=${store.apiKey}`
+      let apiUrlSeries = `${store.apiSeriesURL}?api_key=${store.apiKey}`
       if(this.store.searchKey !== ""){
         apiUrl += `&query=${this.store.searchKey}`
+        apiUrlSeries += `&query=${this.store.searchKey}`
       }
       axios.get(apiUrl).then((resp) => {
         this.store.movies = resp.data.results
         console.log(this.store.movies);
       })
-
-    }
+      axios.get(apiUrlSeries).then((resp) => {
+        this.store.series = resp.data.results 
+        console.log(this.store.series);
+      })
+      
+      
+    },
   }
 }
 </script>
