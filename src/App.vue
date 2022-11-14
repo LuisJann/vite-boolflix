@@ -19,9 +19,13 @@ export default{
   },
   methods: {
     titleFilter(){
-      let apiUrl = `${store.apiMovieURL}?api_key=${store.apiKey}&query=ciao`
+      let apiUrl = `${store.apiMovieURL}?api_key=${store.apiKey}`
+      if(this.store.searchKey !== ""){
+        apiUrl += `&query=${this.store.searchKey}`
+      }
       axios.get(apiUrl).then((resp) => {
-        console.log(resp);
+        this.store.movies = resp.data.results
+        console.log(this.store.movies);
       })
 
     }
@@ -30,7 +34,7 @@ export default{
 </script>
 
 <template>
-  <SearchApp />
+  <SearchApp @searchButton="titleFilter"/>
   <AppList />
 </template>
 

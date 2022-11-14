@@ -1,17 +1,24 @@
 <script>
+import {store} from "../store";
 
 export default {
-    name:"AppList"
+    name:"AppList",
+    data(){
+        return{
+            store
+        }
+    }
 }
 </script>
 
 <template>
+    <h2>Film</h2>
     <div class="container">
-        <div class="card">
-            <h2>Prova</h2>
-            <h3>prova</h3>
-            <p>prova</p>
-            <span>prova</span>
+        <div class="card" v-for="(movie,index) in store.movies" :key="index">
+            <h2>{{movie.title}}</h2>
+            <h3>{{movie.original_title}}</h3>
+            <p>{{movie.original_language}}</p>
+            <span>{{movie.vote_average}}</span>
         </div>
     </div>
 </template>
