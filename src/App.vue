@@ -2,6 +2,8 @@
 import SearchApp from './components/SearchApp.vue';
 import AppList from './components/AppList.vue';
 
+
+
 import {store} from "./store";
 import axios from "axios";
 export default{
@@ -14,28 +16,27 @@ export default{
       store,
     }
   },
-  created(){
-    this.titleFilter()
-
-  },
   methods: {
     titleFilter(){
-      let apiUrl = `${store.apiMovieURL}?api_key=${store.apiKey}`
+      let apiUrlMovie = `${store.apiMovieURL}?api_key=${store.apiKey}`
       let apiUrlSeries = `${store.apiSeriesURL}?api_key=${store.apiKey}`
       if(this.store.searchKey !== ""){
-        apiUrl += `&query=${this.store.searchKey}`
+        apiUrlMovie += `&query=${this.store.searchKey}`
         apiUrlSeries += `&query=${this.store.searchKey}`
       }
-      axios.get(apiUrl).then((resp) => {
+      axios.get(apiUrlMovie).then((resp) => {
         this.store.movies = resp.data.results
         console.log(this.store.movies);
+      }).catch(err =>{
+        console.log(err);
       })
       axios.get(apiUrlSeries).then((resp) => {
         this.store.series = resp.data.results 
         console.log(this.store.series);
+      }).catch(err =>{
+        console.log(err);
       })
-      
-      
+      this.store.searchKey="";
     },
   }
 }
@@ -46,6 +47,7 @@ export default{
   <AppList />
 </template>
 
-<style>
+<style lang="scss">
+@use "./styles/general.scss" as*;
 
 </style>
