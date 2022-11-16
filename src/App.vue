@@ -43,11 +43,30 @@ export default{
 </script>
 
 <template>
-  <SearchApp @searchButton="titleFilter"/>
-  <AppList />
+  <div class="container">
+    <div class="logo">
+      <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="">
+    </div>
+    <div>
+        <SearchApp @searchButton="titleFilter"/>
+    </div>
+  </div>
+  <main>
+    <AppList />
+  </main>
 </template>
 
 <style lang="scss">
 @use "./styles/general.scss" as*;
+  .logo{
+    width: 100px;
+    padding-left: 10px;
+  }
 
+main{
+  width: 100%;
+  height: 100vh;
+  background-color: gray;
+  overflow-y: auto;
+}
 </style>
